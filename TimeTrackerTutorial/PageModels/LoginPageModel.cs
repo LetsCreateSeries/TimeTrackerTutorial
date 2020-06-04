@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using TimeTrackerTutorial.PageModels.Base;
+using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Navigation;
 using Xamarin.Forms;
 
@@ -17,11 +18,27 @@ namespace TimeTrackerTutorial.PageModels
             set => SetProperty(ref _loginCommand, value);
         }
 
-        private INavigationService _navigationService;
+        private string _username;
+        public string Username
+        {
+            get => _username;
+            set => SetProperty(ref _username, value);
+        }
 
-        public LoginPageModel(INavigationService navigationService)
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+        private INavigationService _navigationService;
+        private IAccountService _accountService;
+
+        public LoginPageModel(INavigationService navigationService, IAccountService accountService)
         {
             _navigationService = navigationService;
+            _accountService = accountService;
 
             // Init our Login Command
             LoginCommand = new Command(DoLoginAction);
@@ -30,11 +47,17 @@ namespace TimeTrackerTutorial.PageModels
         /// <summary>
         /// Perform login validation and navigation if applicable
         /// </summary>
-        private void DoLoginAction()
+        private async void DoLoginAction()
         {
-            // Skip the validation for now, but assume success and 
-            // navigate to the Dashboard.
-            _navigationService.NavigateToAsync<DashboardPageModel>();
+            var loginAttempt = await _accountService.LoginAsync(Username, Password);
+            if (loginAttempt)
+            {
+                // navigate to the Dashboard.
+                await _navigationService.NavigateToAsync<DashboardPageModel>();
+            } else
+            {
+                // TODO: Display an Alert for Failure!
+            }
         }
     }
 }

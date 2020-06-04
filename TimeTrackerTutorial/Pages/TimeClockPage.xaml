@@ -4,12 +4,39 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:buttons="clr-namespace:TimeTrackerTutorial.Views.Buttons"
              x:Class="TimeTrackerTutorial.Pages.TimeClockPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout BackgroundColor="LightBlue">
+                <Label Text="{Binding RunningTotal, StringFormat='{}{0:h\\:mm\\:ss}'}" />
+                <Label Text="{Binding CurrentStartTime, StringFormat='You clocked in at {0:h:mm tt}'}" />
+                <buttons:BindableButton BindingContext="{Binding ClockInOutButtonModel}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Start" HorizontalOptions="FillAndExpand" />
+                    <Label Text="End" HorizontalOptions="FillAndExpand" />
+                    <Label Text="Total" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </StackLayout>
+            
+            <ListView ItemsSource="{Binding WorkItems}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Start}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding End}" HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding Total}" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout BackgroundColor="LightBlue">
+                <Label Text="{Binding TodaysEarnings, StringFormat='Earnings Today: {0}'}"
+                       HorizontalOptions="Center" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,30 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-            xmlns:pages="clr-namespace:TimeTrackerTutorial.Pages"
-             x:Class="TimeTrackerTutorial.Pages.DashboardPage">
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+        android:TabbedPage.ToolbarPlacement="Bottom"
+        xmlns:pages="clr-namespace:TimeTrackerTutorial.Pages"
+        x:Class="TimeTrackerTutorial.Pages.DashboardPage">
     <TabbedPage.Children>
         <NavigationPage Title="Time">
             <x:Arguments>
-                <pages:TimeClockPage />
+                <pages:TimeClockPage BindingContext="{Binding TimeClockPageModel}" />
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Summary">
             <x:Arguments>
-                <pages:SummaryPage />
+                <pages:SummaryPage BindingContext="{Binding SummaryPageModel}" />
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Profile">
             <x:Arguments>
-                <pages:ProfilePage />
+                <pages:ProfilePage BindingContext="{Binding ProfilePageModel}" />
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Settings">
             <x:Arguments>
-                <pages:SettingsPage />
+                <pages:SettingsPage BindingContext="{Binding SettingsPageModel}" />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

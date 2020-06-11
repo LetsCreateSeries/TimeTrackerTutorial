@@ -8,7 +8,7 @@ namespace TimeTrackerTutorial.Services.Navigation
     {
         public Task GoBackAsync()
         {
-            if (Application.Current.MainPage is NavigationPage navPage)
+            if (App.Current.MainPage is NavigationPage navPage)
             {
                 return navPage.PopAsync();
             }
@@ -24,20 +24,24 @@ namespace TimeTrackerTutorial.Services.Navigation
             {
                 if (page is TabbedPage tabbedPage)
                 {
-                    Application.Current.MainPage = tabbedPage;
+                    App.Current.MainPage = tabbedPage;
                 }
                 else
                 {
-                    Application.Current.MainPage = new NavigationPage(page);
+                    App.Current.MainPage = new NavigationPage(page);
                 }
             }
             else
             {
-                if (Application.Current.MainPage is NavigationPage navigationPage)
+                if (page is TabbedPage tabPage)
+                {
+                    App.Current.MainPage = tabPage;
+                }
+                else if (App.Current.MainPage is NavigationPage navigationPage)
                 {
                     await navigationPage.PushAsync(page);
                 }
-                else if (Application.Current.MainPage is TabbedPage tabbedPage)
+                else if (App.Current.MainPage is TabbedPage tabbedPage)
                 {
                     if (tabbedPage.CurrentPage is NavigationPage nPage)
                     {
@@ -46,14 +50,7 @@ namespace TimeTrackerTutorial.Services.Navigation
                 }
                 else
                 {
-                    if (page is TabbedPage tPage)
-                    {
-                        Application.Current.MainPage = tPage;
-                    }
-                    else
-                    {
-                        Application.Current.MainPage = new NavigationPage(page);
-                    }
+                    App.Current.MainPage = new NavigationPage(page);
                 }
             }
 

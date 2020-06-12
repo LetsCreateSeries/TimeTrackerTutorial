@@ -8,17 +8,24 @@
         x:Class="TimeTrackerTutorial.Pages.TimeClockPage">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout BackgroundColor="LightBlue" Padding="20,50,20,5">
+            <StackLayout BackgroundColor="{StaticResource PrimaryHeaderColor}"
+                    Padding="20,50,20,5">
                 <Label Text="{Binding RunningTotal, StringFormat='{}{0:h\\:mm\\:ss}'}"
-                        FontSize="50" HorizontalTextAlignment="Center" />
+                        FontSize="50" HorizontalTextAlignment="Center"
+                        TextColor="White" />
                 <Label Text="{Binding CurrentStartTime, StringFormat='You clocked in at {0:h:mm tt}'}"
-                        HorizontalTextAlignment="Center" />
+                        HorizontalTextAlignment="Center" TextColor="White"
+                        IsVisible="{Binding IsClockedIn}" />
                 <buttons:BindableButton BindingContext="{Binding ClockInOutButtonModel}"
-                        HorizontalOptions="Center" WidthRequest="200" />
+                        HorizontalOptions="Center" WidthRequest="200"
+                        BackgroundColor="White" />
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Start" HorizontalOptions="CenterAndExpand" />
-                    <Label Text="End" HorizontalOptions="CenterAndExpand" />
-                    <Label Text="Total" HorizontalOptions="CenterAndExpand" />
+                    <Label Text="Start" HorizontalOptions="CenterAndExpand"
+                            TextColor="White" />
+                    <Label Text="End" HorizontalOptions="CenterAndExpand"
+                            TextColor="White" />
+                    <Label Text="Total" HorizontalOptions="CenterAndExpand"
+                            TextColor="White" />
                 </StackLayout>
             </StackLayout>
 
@@ -27,21 +34,25 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Start}"
-                                        HorizontalOptions="FillAndExpand" />
-                                <Label Text="{Binding End}"
-                                        HorizontalOptions="FillAndExpand" />
-                                <Label Text="{Binding Total}"
-                                        HorizontalOptions="FillAndExpand" />
+                                <Label Text="{Binding Start, StringFormat='{}{0:h:mm:ss tt}'}"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding End, StringFormat='{}{0:h:mm:ss tt}'}"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding Total, StringFormat='{}{0:h\\:mm\\:ss}'}"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
-            <StackLayout BackgroundColor="LightBlue" Padding="10">
+            <StackLayout BackgroundColor="{StaticResource PrimaryHeaderColor}"
+                    Padding="10">
                 <Label Text="{Binding TodaysEarnings, StringFormat='Earnings Today: {0}'}"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center" TextColor="White" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

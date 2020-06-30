@@ -5,6 +5,7 @@ using TimeTrackerTutorial.Pages;
 using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Navigation;
 using TimeTrackerTutorial.Services.Statement;
+using TimeTrackerTutorial.Services.Work;
 using TinyIoC;
 using Xamarin.Forms;
 
@@ -28,10 +29,11 @@ namespace TimeTrackerTutorial.PageModels.Base
             Register<SummaryPageModel, SummaryPage>();
             Register<TimeClockPageModel, TimeClockPage>();
 
-            // Register Services (registerd as Singletons by default)
+            // Register Services (registered as Singletons by default)
             _container.Register<INavigationService, NavigationService>();
             _container.Register<IAccountService, MockAccountService>();
             _container.Register<IStatementService, MockStatementService>();
+            _container.Register<IWorkService, MockWorkService>();
         }
 
         /// <summary>

@@ -24,5 +24,22 @@ namespace TimeTrackerTutorial.Services.Work
         {
             return Task.FromResult(new ObservableCollection<WorkItem>(Items));
         }
+
+        public Task<List<WorkItem>> GetWorkForThisPeriodAsync()
+        {
+            return Task.FromResult(new List<WorkItem>
+            {
+                new WorkItem
+                {
+                     Start = DateTime.Now.AddDays(-2),
+                     End = DateTime.Now.AddDays(-2).AddHours(1)
+                },
+                new WorkItem
+                {
+                     Start = DateTime.Now.AddDays(-1),
+                     End = DateTime.Now.AddDays(-1).AddHours(1)
+                },
+            });
+        }
     }
 }

@@ -20,6 +20,7 @@
     <Folder Include="Converters\" />
     <Folder Include="Services\Work\" />
     <Folder Include="Services\Statement\" />
+    <Folder Include="Views\Labels\" />
   </ItemGroup>
 
   <ItemGroup>

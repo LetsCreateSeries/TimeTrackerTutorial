@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TimeTrackerTutorial.Models;
 
@@ -19,7 +20,7 @@ namespace TimeTrackerTutorial.Services.Statement
                     Amount = 10,
                     Date = DateTime.Parse("06/12/2020"),
                     Start = DateTime.Parse("05/24/2020"),
-                    End = DateTime.Parse("06/04/2020"),
+                    End = DateTime.Parse("06/06/2020"),
                     WorkItems = new List<WorkItem>
                     {
                         new WorkItem
@@ -34,7 +35,7 @@ namespace TimeTrackerTutorial.Services.Statement
 
         public Task<List<PayStatement>> GetStatementHistoryAsync()
         {
-            return Task.FromResult(_items);
+            return Task.FromResult(_items.OrderByDescending(s => s.Start).ToList());
         }
     }
 }

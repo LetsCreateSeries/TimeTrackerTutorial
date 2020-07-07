@@ -29,12 +29,12 @@ namespace TimeTrackerTutorial.Droid.Renderers
         {
             base.OnDraw(canvas);
             var paint = new Paint();
-            paint.Color = Color.Gray.ToAndroid();
+            paint.Color = _view.BarColor.ToAndroid();
             paint.StrokeWidth = Context.ToPixels(5);
             canvas.DrawLine(0, canvas.Height / 2, canvas.Width, canvas.Height / 2, paint);
 
             var currentProgressWidth = (_view.Current - _view.Min) / (_view.Max - _view.Min);
-            paint.Color = Color.Blue.ToAndroid();
+            paint.Color = _view.FillColor.ToAndroid();
             canvas.DrawLine(0, canvas.Height / 2, (float)(canvas.Width * currentProgressWidth), canvas.Height / 2, paint);
         }
     }

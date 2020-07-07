@@ -7,10 +7,12 @@
         <Frame Padding="0" CornerRadius="3" BackgroundColor="White"
                 HasShadow="True">
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Earnings}" HorizontalOptions="End" />
+                <views:StatementEarningsView WidthRequest="120"
+                        Earnings="{Binding Earnings}" />
                 <StackLayout HorizontalOptions="FillAndExpand">
                     <views:HoursProgressView Current="{Binding TotalHours}"
-                            HeightRequest="20" />
+                            HeightRequest="20" BarColor="LightGray"
+                            FillColor="{StaticResource PrimaryHeaderColor}" />
                     <Label Text="{Binding PayRange}"
                             HorizontalOptions="CenterAndExpand" />
                 </StackLayout>

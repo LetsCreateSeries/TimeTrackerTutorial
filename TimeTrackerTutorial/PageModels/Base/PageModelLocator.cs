@@ -31,7 +31,7 @@ namespace TimeTrackerTutorial.PageModels.Base
 
             // Register Services (registered as Singletons by default)
             _container.Register<INavigationService, NavigationService>();
-            _container.Register<IAccountService, MockAccountService>();
+            _container.Register<IAccountService>(DependencyService.Get<IAccountService>());
             _container.Register<IStatementService, MockStatementService>();
             _container.Register<IWorkService, MockWorkService>();
         }
@@ -50,14 +50,35 @@ namespace TimeTrackerTutorial.PageModels.Base
 
         public static T Resolve<T>() where T : class
         {
-            return _container.Resolve<T>();
+            try
+            {
+                return _container.Resolve<T>();
+            }
+            catch (TinyIoCResolutionException e)
+            {
+                var message = e.Message;
+                System.Diagnostics.Debug.WriteLine(e.Message);
+
+                while (e.InnerException is TinyIoCResolutionException ex)
+                {
+                    message = ex.Message;
+                    System.Diagnostics.Debug.WriteLine("\t" + ex.Message);
+                    e = ex;
+                }
+#if DEBUG
+                App.Current.MainPage.DisplayAlert("Resolution Error", message, "Ok");
+#endif
+            }
+            return default(T);
         }
 
-        public static Page CreatePageFor(Type pageModelType)
+
+        public static Page CreatePageFor<TPageModelType>() where TPageModelType : PageModelBase
         {
+            Type pageModelType = typeof(TPageModelType);
             var pageType = _lookupTable[pageModelType];
             var page = (Page)Activator.CreateInstance(pageType);
-            var pageModel = _container.Resolve(pageModelType);
+            var pageModel = Resolve<TPageModelType>();
             page.BindingContext = pageModel;
             return page;
         }

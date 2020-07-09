@@ -18,7 +18,7 @@ namespace TimeTrackerTutorial.Services.Navigation
         public async Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false)
             where TPageModel : PageModelBase
         {
-            Page page = PageModelLocator.CreatePageFor(typeof(TPageModel));
+            Page page = PageModelLocator.CreatePageFor<TPageModel>();
 
             if (setRoot)
             {

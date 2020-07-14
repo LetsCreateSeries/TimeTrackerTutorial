@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="TimeTrackerTutorial.Pages.LoginEmailPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Login Page" HorizontalOptions="CenterAndExpand" />
+            <Entry Placeholder="username" Text="{Binding Username}" />
+            <Entry Placeholder="password" Text="{Binding Password}"
+                    IsPassword="True" />
+            <Button Text="Log In" Command="{Binding LoginCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="TimeTrackerTutorial.Views.LoginOptionView">
+    <ContentView.Content>
+        <Frame WidthRequest="220" HasShadow="True" HorizontalOptions="Center"
+                CornerRadius="2" BackgroundColor="{Binding BackgroundColor}"
+                Margin="20,3" Padding="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}" />
+            </Frame.GestureRecognizers>
+            <StackLayout Orientation="Horizontal" Margin="16,8">
+                <Image Source="{Binding Icon}" WidthRequest="20"
+                        HeightRequest="20" VerticalOptions="Center"
+                        Aspect="AspectFit" />
+                <Label FontAttributes="Bold" Text="{Binding Text}"
+                        TextColor="White" VerticalOptions="Center" />
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

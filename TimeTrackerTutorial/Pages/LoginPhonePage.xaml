@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="TimeTrackerTutorial.Pages.LoginPhonePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Login Phone Page" HorizontalOptions="CenterAndExpand" />
+            <Entry Placeholder="Phone Number Ex: 555-555-5555"
+                    Text="{Binding PhoneNumber}" />
+            <Entry Placeholder="SMS Code" Text="{Binding Code}"
+                    IsVisible="{Binding CodeSent}" />
+            <Button Text="{Binding ButtonText}" Command="{Binding NextCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -34,5 +34,16 @@
 	<string>TimeTrackerTutorial</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.897774963934-dn3hqrg7m5afbk8nrjt3dpts0o6uasi7</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

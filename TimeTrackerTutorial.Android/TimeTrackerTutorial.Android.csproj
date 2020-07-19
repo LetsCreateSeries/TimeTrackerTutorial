@@ -61,6 +61,9 @@
     <PackageReference Include="Xamarin.Firebase.Auth">
       <Version>60.1142.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.10.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

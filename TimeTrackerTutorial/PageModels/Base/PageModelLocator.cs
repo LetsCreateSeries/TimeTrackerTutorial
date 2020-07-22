@@ -5,6 +5,7 @@ using TimeTrackerTutorial.Pages;
 using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Navigation;
 using TimeTrackerTutorial.Services.Statement;
+using TimeTrackerTutorial.Services.Work;
 using TinyIoC;
 using Xamarin.Forms;
 
@@ -32,6 +33,7 @@ namespace TimeTrackerTutorial.PageModels.Base
             _container.Register<INavigationService, NavigationService>();
             _container.Register<IAccountService, MockAccountService>();
             _container.Register<IStatementService, MockStatementService>();
+            _container.Register<IWorkService, MockWorkService>();
         }
 
         /// <summary>
@@ -55,8 +57,23 @@ namespace TimeTrackerTutorial.PageModels.Base
         {
             var pageType = _lookupTable[pageModelType];
             var page = (Page)Activator.CreateInstance(pageType);
-            var pageModel = _container.Resolve(pageModelType);
-            page.BindingContext = pageModel;
+            try
+            {
+                var pageModel = _container.Resolve(pageModelType);
+                page.BindingContext = pageModel;
+            }
+            catch (TinyIoCResolutionException e)
+            {
+                // Print to output for easier debugging
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                while (e.InnerException is TinyIoCResolutionException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("\t Resolution exception:" + ex.Message);
+                    e = ex;
+                }
+                // Still crash the app
+                throw e;
+            }
             return page;
         }
     }

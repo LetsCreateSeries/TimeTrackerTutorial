@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TimeTrackerTutorial.Models;
 using TimeTrackerTutorial.Pages;
+using TimeTrackerTutorial.Services;
 using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Navigation;
 using TimeTrackerTutorial.Services.Statement;
@@ -36,6 +38,8 @@ namespace TimeTrackerTutorial.PageModels.Base
             _container.Register<IAccountService>(DependencyService.Get<IAccountService>());
             _container.Register<IStatementService, MockStatementService>();
             _container.Register<IWorkService, MockWorkService>();
+            _container.Register(DependencyService.Get<IRepository<AuthenticatedUser>>());
+            _container.Register(DependencyService.Get<IRepository<SampleData>>());
         }
 
         /// <summary>

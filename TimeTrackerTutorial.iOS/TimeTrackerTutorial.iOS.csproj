@@ -76,6 +76,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\HoursProgressViewRenderer.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\BaseFirestoreRepository.cs" />
+    <Compile Include="Extensions\DocumentSnapshotExtensions.cs" />
+    <Compile Include="Services\ProfileService.cs" />
+    <Compile Include="Services\SampleDateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -148,6 +152,9 @@
     <PackageReference Include="Xamarin.Firebase.iOS.CloudFirestore">
       <Version>1.4.2.2</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -159,6 +166,7 @@
   <ItemGroup>
     <Folder Include="Renderers\" />
     <Folder Include="Services\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GoogleService-Info.plist" />

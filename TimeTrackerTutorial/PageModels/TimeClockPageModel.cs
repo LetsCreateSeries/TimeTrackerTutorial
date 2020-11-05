@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using TimeTrackerTutorial.Models;
 using TimeTrackerTutorial.PageModels.Base;
+using TimeTrackerTutorial.Services;
 using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Work;
 using TimeTrackerTutorial.ViewModels.Buttons;
@@ -61,7 +62,8 @@ namespace TimeTrackerTutorial.PageModels
         private IWorkService _workService;
         private double _hourlyRate;
 
-        public TimeClockPageModel(IAccountService accountService, IWorkService workService)
+        public TimeClockPageModel(IAccountService accountService,
+            IWorkService workService)
         {
             _accountService = accountService;
             _workService = workService;
@@ -82,6 +84,18 @@ namespace TimeTrackerTutorial.PageModels
             RunningTotal = new TimeSpan();
             _hourlyRate = await _accountService.GetCurrentPayRateAsync();
             WorkItems = await _workService.GetTodaysWorkAsync();
+            var result = await PageModelLocator.Resolve<IRepository<TestData>>().Save(new TestData
+            {
+                Age = 30,
+                Amount = 100.0,
+                Flag = false,
+                Name = "Some Name",
+                SomeDate = DateTime.Now
+            });
+            if (result)
+            {
+
+            }
             await base.InitializeAsync(navigationData);
         }
 

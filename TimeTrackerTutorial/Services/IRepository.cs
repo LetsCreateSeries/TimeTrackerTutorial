@@ -6,7 +6,7 @@ namespace TimeTrackerTutorial.Services
 {
     public interface IIdentifiable
     {
-        string Id { get; }
+        string Id { get; set; }
     }
 
     public interface IRepository<T> where T : IIdentifiable

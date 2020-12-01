@@ -65,7 +65,8 @@ namespace TimeTrackerTutorial.iOS.Services
         {
             var tcs = new TaskCompletionSource<bool>();
 
-            Firebase.CloudFirestore.Firestore.SharedInstance
+            // TODO: We need to retain the Doc ID
+            var docRef = Firebase.CloudFirestore.Firestore.SharedInstance
                 .GetCollection(DocumentPath)
                 .AddDocument(item.Convert(), new Firebase.CloudFirestore.AddDocumentCompletionHandler((error) =>
                 {

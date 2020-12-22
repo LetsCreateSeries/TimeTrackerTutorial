@@ -39,20 +39,15 @@ namespace TimeTrackerTutorial.Droid.Extensions
                     var dtFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                     dict.Add(key, dtFormat.Format(dt));
                 }
-                else if (value.Class.IsInstance(new ArrayList()))
+                else if (value is System.Collections.ICollection collection)
                 {
-                    if (value is System.Collections.ICollection collection)
+                    var arrList = new ArrayList(collection);
+                    var list = new List<string>();
+                    for (var i = 0; i < arrList.Size(); i++)
                     {
-                        var lst = new List<string>();
-                        var list = new ArrayList(collection);
-                        for (var i = 0; i < list.Size(); i++)
-                        {
-                            var item = list.Get(i);
-                            var itemStr = item.ToString();
-                            lst.Add(itemStr);
-                        }
-                        dict.Add(key, lst);
+                        list.Add(arrList.Get(i).ToString());
                     }
+                    dict.Add(key, list);
                 }
                 else
                 {

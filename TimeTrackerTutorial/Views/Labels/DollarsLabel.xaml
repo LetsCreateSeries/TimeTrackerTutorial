@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeTrackerTutorial.Views.Labels.DollarsLabel">
+  <ContentView.Content>
+      <StackLayout Orientation="Horizontal" Spacing="0">
+            <Label Text="$" FontSize="16" Margin="0,16,0,0" x:Name="lblDollarSign" TextColor="White" />
+            <Label FontSize="50" x:Name="lblDollarValue" TextColor="White" />
+            <Label FontSize="16" Margin="0,16,0,0" x:Name="lblCentValue" TextColor="White" />
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

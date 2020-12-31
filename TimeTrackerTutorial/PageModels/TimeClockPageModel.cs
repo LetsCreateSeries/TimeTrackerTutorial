@@ -84,24 +84,20 @@ namespace TimeTrackerTutorial.PageModels
             RunningTotal = new TimeSpan();
             _hourlyRate = await _accountService.GetCurrentPayRateAsync();
             WorkItems = await _workService.GetTodaysWorkAsync();
-            var items = await PageModelLocator.Resolve<IRepository<TestData>>().GetAll();
-            //.Get("0yMnYwlMxt2dAMciZb1F");
-            if (items != null)
+            if (WorkItems.Count == 0)
             {
-
+                for (int i = 1; i < 4; i++)
+                {
+                    WorkItems.Add(new WorkItem
+                    {
+                        Id = i.ToString(),
+                        Start = DateTime.Now.AddDays(-i).AddHours(-i),
+                        End = DateTime.Now.AddDays(-i),
+                        Rate = _hourlyRate
+                    });
+                }
+                TodaysEarnings = 6 * _hourlyRate;
             }
-            //var result = await PageModelLocator.Resolve<IRepository<TestData>>().Save(new TestData
-            //{
-            //    Age = 30,
-            //    Amount = 100.0,
-            //    Flag = false,
-            //    Name = "Some Name",
-            //    SomeDate = DateTime.Now
-            //});
-            //if (result)
-            //{
-
-            //}
             await base.InitializeAsync(navigationData);
         }
 

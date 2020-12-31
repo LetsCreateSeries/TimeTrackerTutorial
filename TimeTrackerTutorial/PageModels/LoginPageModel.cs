@@ -46,6 +46,7 @@ namespace TimeTrackerTutorial.PageModels
                 GoToEmailLogin,
                 Color.FromHex("#db4437") // red color
                 );
+
         }
 
         private void GoToEmailLogin()

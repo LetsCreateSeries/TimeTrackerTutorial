@@ -15,6 +15,12 @@ namespace TimeTrackerTutorial.Models
             get => End - Start;
         }
 
+        public double Rate { get; set; }
+        public double Earnings
+        {
+            get => Total.TotalHours * Rate;
+        }
+
         public string Id { get; set; }
     }
 }

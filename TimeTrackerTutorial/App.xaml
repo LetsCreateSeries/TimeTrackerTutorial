@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:TimeTrackerTutorial.Converters"
         mc:Ignorable="d" x:Class="TimeTrackerTutorial.App">
     <Application.Resources>
+        <!-- Converters -->
+        <converters:TimespanToHoursConverter x:Key="TimespanToHoursConverter" />
         <!-- Colors -->
         <Color x:Key="PrimaryHeaderColor">#01A9DB</Color>
+        <Color x:Key="GradientStartColor">#00BFFF</Color>
+        <Color x:Key="GradientEndColor">#086A87</Color>
     </Application.Resources>
 </Application>

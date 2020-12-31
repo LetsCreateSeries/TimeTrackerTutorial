@@ -12,7 +12,17 @@ namespace TimeTrackerTutorial.iOS.Services
 
         public virtual Task<bool> Delete(T item)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<bool>();
+
+            Firebase.CloudFirestore.Firestore.SharedInstance
+                .GetCollection(DocumentPath)
+                .GetDocument(item.Id)
+                .DeleteDocument((error) =>
+                {
+                    tcs.TrySetResult(error == null);
+                });
+
+            return tcs.Task;
         }
 
         public virtual Task<T> Get(string id)
@@ -61,11 +71,10 @@ namespace TimeTrackerTutorial.iOS.Services
             return tcs.Task;
         }
 
-        public virtual Task<bool> Save(T item)
+        public virtual async Task<string> Save(T item)
         {
             var tcs = new TaskCompletionSource<bool>();
 
-            // TODO: We need to retain the Doc ID
             var docRef = Firebase.CloudFirestore.Firestore.SharedInstance
                 .GetCollection(DocumentPath)
                 .AddDocument(item.Convert(), new Firebase.CloudFirestore.AddDocumentCompletionHandler((error) =>
@@ -78,8 +87,11 @@ namespace TimeTrackerTutorial.iOS.Services
                     }
                     tcs.TrySetResult(true);
                 }));
+            var result = await tcs.Task;
+            if (result)
+                return docRef.Id;
 
-            return tcs.Task;
+            return null;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase.Firestore;
+using TimeTrackerTutorial.Droid.Extensions;
 using TimeTrackerTutorial.Droid.ServiceListeners;
 using TimeTrackerTutorial.Services;
 
@@ -17,7 +18,15 @@ namespace TimeTrackerTutorial.Droid.Services
 
         public Task<bool> Delete(T item)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<bool>();
+
+            FirebaseFirestore.Instance
+                .Collection(DocumentPath)
+                .Document(item.Id)
+                .Delete()
+                .AddOnCompleteListener(new OnDeleteCompleteListener(tcs));
+
+            return tcs.Task;
         }
 
         public Task<T> Get(string id)
@@ -46,9 +55,16 @@ namespace TimeTrackerTutorial.Droid.Services
             return tcs.Task;
         }
 
-        public Task<bool> Save(T item)
+        public Task<string> Save(T item)
         {
-            throw new NotImplementedException();
+            var tcs = new TaskCompletionSource<string>();
+
+            FirebaseFirestore.Instance
+                .Collection(DocumentPath)
+                .Add(item.Convert())
+                .AddOnCompleteListener(new OnCreateCompleteListener(tcs));
+
+            return tcs.Task;
         }
     }
 }

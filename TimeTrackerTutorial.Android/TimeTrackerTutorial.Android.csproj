@@ -84,6 +84,9 @@
     <Compile Include="Services\TestDataRepository.cs" />
     <Compile Include="Extensions\JavaLangExtensions.cs" />
     <Compile Include="ServiceListeners\OnCollectionCompleteListener.cs" />
+    <Compile Include="Extensions\IIdentifiableExtensions.cs" />
+    <Compile Include="ServiceListeners\OnCreateCompleteListener.cs" />
+    <Compile Include="ServiceListeners\OnDeleteCompleteListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

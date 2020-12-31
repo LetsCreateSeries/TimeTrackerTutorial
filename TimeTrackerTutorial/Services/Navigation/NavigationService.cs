@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TimeTrackerTutorial.PageModels.Base;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace TimeTrackerTutorial.Services.Navigation
             return Task.CompletedTask;
         }
 
-        public async Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false)
+        public async Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false, bool isModal = false)
             where TPageModel : PageModelBase
         {
             Page page = PageModelLocator.CreatePageFor<TPageModel>();
@@ -39,13 +40,21 @@ namespace TimeTrackerTutorial.Services.Navigation
                 }
                 else if (App.Current.MainPage is NavigationPage navigationPage)
                 {
-                    await navigationPage.PushAsync(page);
+                    // We can check if the page should be presented modally or a standard push
+                    if (isModal)
+                        await navigationPage.Navigation.PushModalAsync(page);
+                    else
+                        await navigationPage.PushAsync(page);
                 }
                 else if (App.Current.MainPage is TabbedPage tabbedPage)
                 {
                     if (tabbedPage.CurrentPage is NavigationPage nPage)
                     {
-                        await nPage.PushAsync(page);
+                        // We can check if the page should be presented modally or a standard push
+                        if (isModal)
+                            await nPage.Navigation.PushModalAsync(page);
+                        else
+                            await nPage.PushAsync(page);
                     }
                 }
                 else

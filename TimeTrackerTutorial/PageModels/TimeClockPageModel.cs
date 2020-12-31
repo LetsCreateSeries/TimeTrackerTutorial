@@ -107,6 +107,11 @@ namespace TimeTrackerTutorial.PageModels
 
         private async void OnClockInOutAction()
         {
+            // TODO: Remove this line. 
+            // This is for testing only. This demonstrates usage of the new NavigateToAsync
+            // method, and indicates modal presentation.
+            await PageModelLocator.Resolve<Services.Navigation.INavigationService>().NavigateToAsync<LoginPageModel>(isModal: true);
+            return;
             if (IsClockedIn)
             {
                 _timer.Enabled = false;

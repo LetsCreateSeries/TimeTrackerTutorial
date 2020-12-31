@@ -11,8 +11,10 @@ namespace TimeTrackerTutorial.Services.Navigation
         /// </summary>
         /// <typeparam name="TPageModel"></typeparam>
         /// <param name="navigationData"></param>
+        /// <param name="setRoot"></param>
+        /// <param name="isModal">Added to present page modally</param>
         /// <returns></returns>
-        Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false)
+        Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false, bool isModal = false)
             where TPageModel : PageModelBase;
 
         /// <summary>

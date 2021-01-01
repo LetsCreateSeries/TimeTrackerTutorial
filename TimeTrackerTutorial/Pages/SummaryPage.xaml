@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:TimeTrackerTutorial.Views" mc:Ignorable="d"
         xmlns:labels="clr-namespace:TimeTrackerTutorial.Views.Labels"
+             Title="Summary"
         x:Class="TimeTrackerTutorial.Pages.SummaryPage">
     <ContentPage.Content>
         <StackLayout Margin="10">

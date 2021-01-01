@@ -24,6 +24,11 @@ namespace TimeTrackerTutorial.Droid.Services
         {
         }
 
+        public Task<bool> IsLoggedIn()
+        {
+            return Task.FromResult(FirebaseAuth.Instance.CurrentUser != null);
+        }
+
         public Task<double> GetCurrentPayRateAsync()
         {
             return Task.FromResult(10d);

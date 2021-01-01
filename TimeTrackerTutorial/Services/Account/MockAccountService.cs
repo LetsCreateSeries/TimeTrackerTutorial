@@ -18,6 +18,11 @@ namespace TimeTrackerTutorial.Services.Account
             throw new NotImplementedException();
         }
 
+        public Task<bool> IsLoggedIn()
+        {
+            return Task.FromResult(false);
+        }
+
         public Task<bool> LoginAsync(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))

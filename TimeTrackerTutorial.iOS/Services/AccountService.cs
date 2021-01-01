@@ -19,6 +19,11 @@ namespace TimeTrackerTutorial.iOS.Services
         {
         }
 
+        public Task<bool> IsLoggedIn()
+        {
+            return Task.FromResult(Firebase.Auth.Auth.DefaultInstance.CurrentUser != null);
+        }
+
         public Task<double> GetCurrentPayRateAsync()
         {
             return Task.FromResult(10d);

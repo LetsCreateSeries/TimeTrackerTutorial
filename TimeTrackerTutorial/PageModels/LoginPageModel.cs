@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TimeTrackerTutorial.PageModels.Base;
+using TimeTrackerTutorial.Services.Account;
 using TimeTrackerTutorial.Services.Navigation;
 using TimeTrackerTutorial.ViewModels;
 using Xamarin.Forms;
@@ -29,10 +31,12 @@ namespace TimeTrackerTutorial.PageModels
             set => SetProperty(ref _loginPhoneViewModel, value);
         }
 
+        private IAccountService _accountService;
         private INavigationService _navigationService;
 
-        public LoginPageModel(INavigationService navigationService)
+        public LoginPageModel(INavigationService navigationService, IAccountService accountService)
         {
+            _accountService = accountService;
             _navigationService = navigationService;
 
             LoginPhoneViewModel = new LoginOptionViewModel(
@@ -47,6 +51,16 @@ namespace TimeTrackerTutorial.PageModels
                 Color.FromHex("#db4437") // red color
                 );
 
+        }
+
+        public override async Task InitializeAsync(object navigationData)
+        {
+            if  (await _accountService.IsLoggedIn())
+            {
+                // navigate to the Dashboard.
+                await _navigationService.NavigateToAsync<TimeClockPageModel>(setRoot: true);
+            }
+            await base.InitializeAsync(navigationData);
         }
 
         private void GoToEmailLogin()

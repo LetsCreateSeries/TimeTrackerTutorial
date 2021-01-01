@@ -16,34 +16,31 @@
                                    EndColor="{StaticResource GradientEndColor}"
                                    Grid.Row="0"/>
 
-            <StackLayout Grid.Row="0"
-                             Padding="20,35" Spacing="0">
-                <Label Text="Earnings this Period" TextColor="White" FontSize="16"
-                           VerticalOptions="EndAndExpand"/>
-                <labels:DollarsLabel Text="{Binding TodaysEarnings, StringFormat='{}{0:C}'}"
-                           TextColor="White" />
-                <!--<Label Text="{Binding RunningTotal, StringFormat='{}{0:h\\:mm\\:ss}'}"
-                            FontSize="50" HorizontalTextAlignment="Center"
-                            TextColor="White" />-->
-                <!--<Label Text="{Binding CurrentStartTime, StringFormat='You clocked in at {0:h:mm tt}'}"
-                        HorizontalTextAlignment="Center" TextColor="White"
-                        IsVisible="{Binding IsClockedIn}" />
-                    <buttons:BindableButton BindingContext="{Binding ClockInOutButtonModel}"
-                        HorizontalOptions="Center" WidthRequest="200"
-                        BackgroundColor="White" />-->
-                <!--<StackLayout Orientation="Horizontal">
-                        <Label Text="Start" HorizontalOptions="CenterAndExpand"
-                            TextColor="White" />
-                        <Label Text="End" HorizontalOptions="CenterAndExpand"
-                            TextColor="White" />
-                        <Label Text="Total" HorizontalOptions="CenterAndExpand"
-                            TextColor="White" />
-                    </StackLayout>-->
+            <StackLayout Grid.Row="0" Margin="20,0" Spacing="0">
+                <ImageButton HeightRequest="30" WidthRequest="30" Source="settings" Command="{Binding SettingsCommand}"
+                                 BackgroundColor="Transparent" Aspect="AspectFit" VerticalOptions="Start"
+                                 HorizontalOptions="EndAndExpand" Padding="5" Margin="0,10,0,0"/>
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ProfileCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image HeightRequest="50" WidthRequest="50" Source="user"
+                                 BackgroundColor="Transparent" Aspect="AspectFit" />
+                    <StackLayout Spacing="0" VerticalOptions="Center">
+                        <Label Text="John Smith" TextColor="White" />
+                        <Label Text="Sr Software Engineer" TextColor="White" />
+                    </StackLayout>
+                </StackLayout>
+                <labels:DollarsLabel Text="{Binding TodaysEarnings, StringFormat='{}{0:C}'}" TextColor="White" HorizontalOptions="Center" FontSize="60" />
+                <Label Text="Earnings this Period" TextColor="White" FontSize="16" HorizontalOptions="Center"/>
             </StackLayout>
 
 
             <StackLayout Grid.Row="1" BackgroundColor="#efefef" Spacing="0">
                 <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="20">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SummaryCommand}" />
+                    </StackLayout.GestureRecognizers>
                     <Label TextColor="{StaticResource GradientEndColor}" FontAttributes="Bold" Text="Recent Activity" VerticalOptions="End"
                            FontSize="18" HorizontalOptions="StartAndExpand"/>
                     <Label TextColor="{StaticResource GradientEndColor}" Text="View All" VerticalOptions="End" />

@@ -4,12 +4,15 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Input;
 using TimeTrackerTutorial.Models;
 using TimeTrackerTutorial.PageModels.Base;
 using TimeTrackerTutorial.Services;
 using TimeTrackerTutorial.Services.Account;
+using TimeTrackerTutorial.Services.Navigation;
 using TimeTrackerTutorial.Services.Work;
 using TimeTrackerTutorial.ViewModels.Buttons;
+using Xamarin.Forms;
 
 namespace TimeTrackerTutorial.PageModels
 {
@@ -56,15 +59,21 @@ namespace TimeTrackerTutorial.PageModels
             set => SetProperty(ref _clockInOutButtonModel, value);
         }
 
+        public ICommand SummaryCommand => new Command(GoToPage<SummaryPageModel>);
+        public ICommand ProfileCommand => new Command(GoToPage<ProfilePageModel>);
+        public ICommand SettingsCommand => new Command(GoToPage<SettingsPageModel>);
+
         private Timer _timer;
         private ObservableCollection<WorkItem> _workItems;
+        private INavigationService _navigationService;
         private IAccountService _accountService;
         private IWorkService _workService;
         private double _hourlyRate;
 
         public TimeClockPageModel(IAccountService accountService,
-            IWorkService workService)
+            IWorkService workService, INavigationService navigationService)
         {
+            _navigationService = navigationService;
             _accountService = accountService;
             _workService = workService;
             ClockInOutButtonModel = new ButtonModel("Clock In", OnClockInOutAction);
@@ -72,6 +81,11 @@ namespace TimeTrackerTutorial.PageModels
             _timer.Interval = 1000;
             _timer.Enabled = false;
             _timer.Elapsed += _timer_Elapsed;
+        }
+
+        private async void GoToPage<T>() where T : PageModelBase
+        {
+            await _navigationService.NavigateToAsync<T>();
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)

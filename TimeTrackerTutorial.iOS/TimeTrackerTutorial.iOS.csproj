@@ -164,8 +164,13 @@
       <Name>TimeTrackerTutorial</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\user.png" />
+  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GoogleService-Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
 </Project>

@@ -12,8 +12,10 @@ namespace TimeTrackerTutorial.Services.Navigation
         /// <typeparam name="TPageModel"></typeparam>
         /// <param name="navigationData"></param>
         /// <returns></returns>
-        Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false)
+        Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false, bool isModal = false)
             where TPageModel : PageModelBase;
+
+        Task DismissModalAsync();
 
         /// <summary>
         /// Pop navigation backstack

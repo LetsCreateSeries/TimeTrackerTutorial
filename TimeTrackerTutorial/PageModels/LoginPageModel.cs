@@ -58,7 +58,7 @@ namespace TimeTrackerTutorial.PageModels
             if  (await _accountService.IsLoggedIn())
             {
                 // navigate to the Dashboard.
-                await _navigationService.NavigateToAsync<TimeClockPageModel>(setRoot: true);
+                await _navigationService.NavigateToAsync<RecentActivityPageModel>(setRoot: true);
             }
             await base.InitializeAsync(navigationData);
         }

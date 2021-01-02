@@ -65,7 +65,7 @@ namespace TimeTrackerTutorial.PageModels
                 var loginAttempt = await _accountService.VerifyOtpCodeAsync(Code);
                 if (loginAttempt)
                 {
-                    await _navigationService.NavigateToAsync<TimeClockPageModel>(setRoot: true);
+                    await _navigationService.NavigateToAsync<RecentActivityPageModel>(setRoot: true);
                 }
                 else
                 {

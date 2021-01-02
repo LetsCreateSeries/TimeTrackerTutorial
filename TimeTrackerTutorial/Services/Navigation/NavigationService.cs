@@ -15,7 +15,14 @@ namespace TimeTrackerTutorial.Services.Navigation
             return Task.CompletedTask;
         }
 
-        public async Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false)
+        public Task DismissModalAsync()
+        {
+            if (App.Current.MainPage is NavigationPage navPage)
+                return navPage.Navigation.PopModalAsync();
+            return Task.CompletedTask;
+        }
+
+        public async Task NavigateToAsync<TPageModel>(object navigationData = null, bool setRoot = false, bool isModal = false)
             where TPageModel : PageModelBase
         {
             Page page = PageModelLocator.CreatePageFor<TPageModel>();
@@ -39,13 +46,19 @@ namespace TimeTrackerTutorial.Services.Navigation
                 }
                 else if (App.Current.MainPage is NavigationPage navigationPage)
                 {
-                    await navigationPage.PushAsync(page);
+                    if (isModal)
+                        await navigationPage.Navigation.PushModalAsync(page);
+                    else
+                        await navigationPage.PushAsync(page);
                 }
                 else if (App.Current.MainPage is TabbedPage tabbedPage)
                 {
                     if (tabbedPage.CurrentPage is NavigationPage nPage)
                     {
-                        await nPage.PushAsync(page);
+                        if (isModal)
+                            await nPage.Navigation.PushModalAsync(page);
+                        else
+                            await nPage.PushAsync(page);
                     }
                 }
                 else

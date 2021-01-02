@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+        xmlns:buttons="clr-namespace:TimeTrackerTutorial.Views.Buttons"
+        xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
+        xmlns:labels="clr-namespace:TimeTrackerTutorial.Views.Labels"
+             x:Class="TimeTrackerTutorial.Pages.RecentActivityPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="240,*" RowSpacing="0">
+            <skViews:GradientBoxView HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   StartColor="{StaticResource GradientStartColor}"
+                                   EndColor="{StaticResource GradientEndColor}"
+                                   Grid.Row="0"/>
+
+            <StackLayout Grid.Row="0" Margin="20,0" Spacing="0">
+                <ImageButton HeightRequest="30" WidthRequest="30" Source="settings" Command="{Binding SettingsCommand}"
+                                 BackgroundColor="Transparent" Aspect="AspectFit" VerticalOptions="Start"
+                                 HorizontalOptions="EndAndExpand" Padding="5" Margin="0,10,0,0"/>
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ProfileCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image HeightRequest="50" WidthRequest="50" Source="user"
+                                 BackgroundColor="Transparent" Aspect="AspectFit" />
+                    <StackLayout Spacing="0" VerticalOptions="Center">
+                        <Label Text="John Smith" TextColor="White" />
+                        <Label Text="Sr Software Engineer" TextColor="White" />
+                    </StackLayout>
+                </StackLayout>
+                <labels:DollarsLabel Text="{Binding TodaysEarnings, StringFormat='{}{0:C}'}" TextColor="White" HorizontalOptions="Center" FontSize="60" />
+                <Label Text="Earnings this Period" TextColor="White" FontSize="16" HorizontalOptions="Center"/>
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="1" BackgroundColor="#efefef" Spacing="0">
+                <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="20">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SummaryCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Label TextColor="{StaticResource GradientEndColor}" FontAttributes="Bold" Text="Recent Activity" VerticalOptions="End"
+                           FontSize="18" HorizontalOptions="StartAndExpand"/>
+                    <Label TextColor="{StaticResource GradientEndColor}" Text="View All" VerticalOptions="End" />
+                </StackLayout>
+                <Frame BackgroundColor="White" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                       Padding="0,10" Margin="20,0,20,20" HasShadow="False">
+                    <ListView ItemsSource="{Binding WorkItems}" SeparatorVisibility="None" RowHeight="80">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid ColumnDefinitions="50,*,100" Margin="20,0">
+                                        <skViews:GradientCircleView StartColor="{StaticResource GradientStartColor}"
+                                                                    EndColor="{StaticResource GradientEndColor}"
+                                                                    Grid.Column="0"
+                                                                    HorizontalOptions="CenterAndExpand"
+                                                                    VerticalOptions="CenterAndExpand" />
+                                        <StackLayout Grid.Column="0" Spacing="0">
+                                            <Label Text="{Binding Total, Converter={StaticResource TimespanToHoursConverter}}"
+                                                    HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="12"
+                                                    VerticalOptions="EndAndExpand" FontAttributes="Bold" VerticalTextAlignment="End" Margin="0,2,0,0" />
+                                            <Label Text="hrs" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" TextColor="White"
+                                                   FontSize="8" Margin="0,-5,0,0"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="CenterAndExpand">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding Start, StringFormat='{}{0:h:mm tt}'}" FontAttributes="Bold" TextColor="{StaticResource GradientEndColor}"  />
+                                                <Label Text="-" FontAttributes="Bold" TextColor="{StaticResource GradientEndColor}" />
+                                                <Label Text="{Binding End, StringFormat='{}{0:h:mm tt}'}" FontAttributes="Bold" TextColor="{StaticResource GradientEndColor}" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Start, StringFormat='{}{0:MMMM d}'}"
+                                                        HorizontalOptions="Start" FontAttributes="Bold" TextColor="LightGray" />
+                                        </StackLayout>
+                                        <Label Text="{Binding Earnings, StringFormat='+{0:C}'}" TextColor="{StaticResource GradientStartColor}" VerticalOptions="Center"
+                                               Grid.Column="2" HorizontalTextAlignment="End" Margin="20,0" FontAttributes="Bold" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+
+            </StackLayout>
+
+            <buttons:BindableButton BindingContext="{Binding ClockInOutButtonModel}" 
+                                    BackgroundColor="White" TextColor="{StaticResource GradientEndColor}" 
+                                    HorizontalOptions="Center"
+                                    WidthRequest="240" CornerRadius="25" HeightRequest="50" 
+                                    FontAttributes="Bold" Grid.Row="1" Margin="0,-25,0,0" 
+                                    VerticalOptions="Start" />
+            <!--<StackLayout BackgroundColor="{StaticResource PrimaryHeaderColor}"
+                    Padding="10" Grid.Row="2">
+                    <Label Text="{Binding TodaysEarnings, StringFormat='Earnings Today: {0:C}'}"
+                        HorizontalOptions="Center" TextColor="White" />
+                </StackLayout>-->
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

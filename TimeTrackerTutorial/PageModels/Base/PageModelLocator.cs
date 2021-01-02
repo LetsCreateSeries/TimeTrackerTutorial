@@ -32,6 +32,7 @@ namespace TimeTrackerTutorial.PageModels.Base
             Register<SettingsPageModel, SettingsPage>();
             Register<SummaryPageModel, SummaryPage>();
             Register<TimeClockPageModel, TimeClockPage>();
+            Register<RecentActivityPageModel, RecentActivityPage>();
 
             // Register Services (registered as Singletons by default)
             _container.Register<INavigationService, NavigationService>();

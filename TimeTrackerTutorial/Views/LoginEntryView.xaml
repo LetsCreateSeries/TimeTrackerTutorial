@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:entries="clr-namespace:TimeTrackerTutorial.Views.Entries"
+        xmlns:skviews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
+        x:Class="TimeTrackerTutorial.Views.LoginEntryView">
+    <ContentView.Content>
+        <Grid RowDefinitions="40,2" RowSpacing="0">
+            <entries:BorderlessEntry Margin="20,0" Placeholder="email"
+                    x:Name="etInput" TextColor="White" PlaceholderColor="#AFFF" />
+            <skviews:GradientUnderlineView Grid.Row="1" Margin="20,0"
+                    x:Name="grdUnderline" ScaleX="0" />
+            <BoxView Color="White" Opacity="0.5" Grid.Row="1" Margin="10,0"
+                    x:Name="bvUnderline" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

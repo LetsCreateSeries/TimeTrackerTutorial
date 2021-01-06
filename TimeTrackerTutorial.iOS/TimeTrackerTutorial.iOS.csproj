@@ -81,6 +81,7 @@
     <Compile Include="Extensions\DocumentSnapshotExtensions.cs" />
     <Compile Include="Services\WorkItemRepository.cs" />
     <Compile Include="Extensions\IIdentifiableExtensions.cs" />
+    <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

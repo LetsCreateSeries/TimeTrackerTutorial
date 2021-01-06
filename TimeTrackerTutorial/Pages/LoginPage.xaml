@@ -4,16 +4,33 @@
         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:TimeTrackerTutorial.Views" mc:Ignorable="d"
+        NavigationPage.HasNavigationBar="False"
+        xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
         x:Class="TimeTrackerTutorial.Pages.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- App Icon -->
-            <Image WidthRequest="200" Aspect="AspectFit"
-                    HorizontalOptions="Center" Margin="20"
-                    Source="{Binding Icon}" />
-            <!-- Login Options -->
-            <views:LoginOptionView BindingContext="{Binding LoginEmailViewModel}" />
-            <views:LoginOptionView BindingContext="{Binding LoginPhoneViewModel}" />
-        </StackLayout>
+        <Grid>
+            <skViews:GradientBoxView StartColor="{StaticResource GradientStartColor}"
+                    EndColor="{StaticResource GradientEndColor}" />
+            <StackLayout Spacing="0" VerticalOptions="CenterAndExpand"
+                    Margin="0,-60,0,0">
+                <!-- App Icon -->
+                <Image WidthRequest="200" Aspect="AspectFit"
+                        HorizontalOptions="Center" Margin="20,80,20,20"
+                        Source="settings" />
+                <views:LoginEntryView Margin="40,10" />
+                <views:LoginEntryView Margin="40,0" />
+                <Button BackgroundColor="Transparent" WidthRequest="220"
+                        HorizontalOptions="End" TextColor="#AFFF"
+                        Text="forgot password" Padding="0" Margin="0" />
+                <!-- Login Options -->
+                <Button BackgroundColor="White" CornerRadius="25"
+                        HeightRequest="50" WidthRequest="220" Margin="0,20,0,0"
+                        HorizontalOptions="Center" Text="LOG IN"
+                        TextColor="{StaticResource GradientEndColor}" />
+                <Button BackgroundColor="Transparent" WidthRequest="220"
+                        HorizontalOptions="Center" TextColor="#AFFF"
+                        Text="USE PHONE SIGN IN" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

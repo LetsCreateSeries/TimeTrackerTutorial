@@ -18,9 +18,6 @@
                         HorizontalOptions="Center" Margin="20,80,20,20"
                         Source="history" />
                 <!-- Login Options -->
-                <Entry BackgroundColor="Transparent" TextColor="White"
-                        PlaceholderColor="#6FFF" Opacity="0.6"
-                        Placeholder="email" FontFamily="Nunito-Regular" />
                 <views:LoginOptionView BindingContext="{Binding LoginEmailViewModel}" />
                 <views:LoginOptionView BindingContext="{Binding LoginPhoneViewModel}" />
             </StackLayout>

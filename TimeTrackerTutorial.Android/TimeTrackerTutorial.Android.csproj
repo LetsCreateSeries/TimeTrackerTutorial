@@ -87,6 +87,7 @@
     <Compile Include="Extensions\IIdentifiableExtensions.cs" />
     <Compile Include="ServiceListeners\OnCreateCompleteListener.cs" />
     <Compile Include="ServiceListeners\OnDeleteCompleteListener.cs" />
+    <Compile Include="Renderers\PlainEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

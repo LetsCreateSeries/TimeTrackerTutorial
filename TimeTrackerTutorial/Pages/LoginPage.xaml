@@ -17,9 +17,8 @@
                 <Image WidthRequest="200" Aspect="AspectFit"
                         HorizontalOptions="Center" Margin="20,80,20,20"
                         Source="history" />
-                <!-- Login Options -->
-                <views:LoginOptionView BindingContext="{Binding LoginEmailViewModel}" />
-                <views:LoginOptionView BindingContext="{Binding LoginPhoneViewModel}" />
+                <views:LoginEntryView BindingContext="{Binding EmailEntryViewModel}" />
+                <views:LoginEntryView BindingContext="{Binding PasswordEntryViewModel}" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

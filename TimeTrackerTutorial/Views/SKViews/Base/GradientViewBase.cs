@@ -28,14 +28,19 @@ namespace TimeTrackerTutorial.Views.SKViews.Base
         {
         }
 
-        protected override void OnPaintSurface(SKImageInfo info, SKCanvas canvas, SKPaint paint)
+        protected virtual SKShader CreateGradientShader(SKImageInfo info)
         {
-            paint.Shader = SKShader.CreateLinearGradient(
+            return SKShader.CreateLinearGradient(
                 new SKPoint(info.Width / 2, 0), // start point (top middle)
                 new SKPoint(info.Width / 2, info.Height), // end point (bottom middle)
                 new SKColor[] { StartColor.ToSKColor(), EndColor.ToSKColor() },
                 new float[] { 0, 1 },
                 SKShaderTileMode.Repeat);
+        }
+
+        protected override void OnPaintSurface(SKImageInfo info, SKCanvas canvas, SKPaint paint)
+        {
+            paint.Shader = CreateGradientShader(info);
 
             DrawGradient(info, canvas, paint);
         }

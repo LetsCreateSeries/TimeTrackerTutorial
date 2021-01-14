@@ -4,16 +4,22 @@
         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:TimeTrackerTutorial.Views" mc:Ignorable="d"
+        NavigationPage.HasNavigationBar="False"
+        xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
         x:Class="TimeTrackerTutorial.Pages.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
-            <!-- App Icon -->
-            <Image WidthRequest="200" Aspect="AspectFit"
-                    HorizontalOptions="Center" Margin="20"
-                    Source="{Binding Icon}" />
-            <!-- Login Options -->
-            <views:LoginOptionView BindingContext="{Binding LoginEmailViewModel}" />
-            <views:LoginOptionView BindingContext="{Binding LoginPhoneViewModel}" />
-        </StackLayout>
+        <Grid>
+            <skViews:RectGradientView StartColor="{StaticResource GradientStartColor}"
+                    EndColor="{StaticResource GradientEndColor}"
+                    VerticalOptions="FillAndExpand" />
+            <StackLayout>
+                <!-- App Icon -->
+                <Image WidthRequest="200" Aspect="AspectFit"
+                        HorizontalOptions="Center" Margin="20,80,20,20"
+                        Source="history" />
+                <views:LoginEntryView BindingContext="{Binding EmailEntryViewModel}" />
+                <views:LoginEntryView BindingContext="{Binding PasswordEntryViewModel}" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

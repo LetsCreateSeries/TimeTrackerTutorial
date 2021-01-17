@@ -23,7 +23,7 @@ namespace TimeTrackerTutorial.Droid.Services
 
         }
 
-        protected abstract string DocumentPath { get; }
+        protected abstract string CollectionPath { get; }
         protected virtual CachingStrategy CachingStrategy { get; } = CachingStrategy.None;
 
         public Task<bool> Delete(T item)
@@ -31,7 +31,7 @@ namespace TimeTrackerTutorial.Droid.Services
             var tcs = new TaskCompletionSource<bool>();
 
             FirebaseFirestore.Instance
-                .Collection(DocumentPath)
+                .Collection(CollectionPath)
                 .Document(item.Id)
                 .Delete()
                 .AddOnCompleteListener(new OnDeleteCompleteListener(tcs));
@@ -39,35 +39,33 @@ namespace TimeTrackerTutorial.Droid.Services
             return tcs.Task;
         }
 
-        private Task<T> _getTask;
         public Task<T> Get(string id)
         {
-            if (IsValidPerCacheStrategy(_getTask, id))
+            if (IsValidPerCacheStrategy(_getAllTask, id))
             {
-                return _getTask;
+                return Task.FromResult(_getAllTask.Result.Where(n => n.Id == id).FirstOrDefault());
             }
             var tcs = new TaskCompletionSource<T>();
 
             FirebaseFirestore.Instance
-                .Collection(DocumentPath)
+                .Collection(CollectionPath)
                 .Document(id)
                 .Get()
                 .AddOnCompleteListener(new OnDocumentCompleteListener<T>(tcs));
-            _getTask = tcs.Task;
             return tcs.Task;
         }
 
         private Task<IList<T>> _getAllTask;
         public Task<IList<T>> GetAll()
         {
-            if(IsValidPerCacheStrategy(_getAllTask, null))
+            if (IsValidPerCacheStrategy(_getAllTask, null))
             {
                 return _getAllTask;
             }
             var tcs = new TaskCompletionSource<IList<T>>();
-           
+
             FirebaseFirestore.Instance
-                .Collection(DocumentPath)
+                .Collection(CollectionPath)
                 .Get()
                 .AddOnCompleteListener(new OnCollectionCompleteListener<T>(tcs));
             _getAllTask = tcs.Task;
@@ -79,7 +77,7 @@ namespace TimeTrackerTutorial.Droid.Services
             var tcs = new TaskCompletionSource<string>();
 
             FirebaseFirestore.Instance
-                .Collection(DocumentPath)
+                .Collection(CollectionPath)
                 .Add(item.Convert())
                 .AddOnCompleteListener(new OnCreateCompleteListener(tcs));
 
@@ -132,24 +130,22 @@ namespace TimeTrackerTutorial.Droid.Services
             if (!IsTaskValid(t))
                 return false;
 
-            if (t.IsCompleted)
+            if (id != null)
             {
-                if (id != null)
-                {
-                    if (t.Result is IList<IIdentifiable> list
-                        && list.Any(n => n.Id == id))
-                        return true;
+                if (t.Result is IList<IIdentifiable> list
+                    && list.Any(n => n.Id == id))
+                    return true;
 
-                    if (t.Result is IIdentifiable item && item.Id == id)
-                        return true;
-                }
-                else
-                {
-                    if (t.Result is IList genericList
-                        && genericList.Count > 0)
-                        return true;
-                }
+                if (t.Result is IIdentifiable item && item.Id == id)
+                    return true;
             }
+            else
+            {
+                if (t.Result is IList genericList
+                    && genericList.Count > 0)
+                    return true;
+            }
+
             return false;
         }
 

@@ -62,8 +62,7 @@ namespace TimeTrackerTutorial.PageModels
         private IWorkService _workService;
         private double _hourlyRate;
 
-        public TimeClockPageModel(IAccountService accountService,
-            IWorkService workService)
+        public TimeClockPageModel(IAccountService accountService, IWorkService workService)
         {
             _accountService = accountService;
             _workService = workService;
@@ -83,9 +82,11 @@ namespace TimeTrackerTutorial.PageModels
         {
             RunningTotal = new TimeSpan();
             _hourlyRate = await _accountService.GetCurrentPayRateAsync();
-            WorkItems = await _workService.GetTodaysWorkAsync();
-
-
+            var work = await _workService.GetTodaysWorkAsync();
+            if (work != null)
+                WorkItems = work;
+            else
+                WorkItems = new ObservableCollection<WorkItem>();
             await base.InitializeAsync(navigationData);
         }
 
@@ -103,7 +104,8 @@ namespace TimeTrackerTutorial.PageModels
                     End = DateTime.Now
                 };
                 WorkItems.Insert(0, item);
-                await _workService.LogWorkAsync(item);
+                var id = await _workService.LogWorkAsync(item);
+                item.Id = id;
             }
             else
             {

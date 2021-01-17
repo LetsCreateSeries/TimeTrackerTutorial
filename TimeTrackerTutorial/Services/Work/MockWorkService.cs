@@ -13,11 +13,11 @@ namespace TimeTrackerTutorial.Services.Work
         {
             Items = new List<WorkItem>();
         }
-
-        public Task<bool> LogWorkAsync(WorkItem item)
+        private int index = 0;
+        public Task<string> LogWorkAsync(WorkItem item)
         {
             Items.Add(item);
-            return Task.FromResult(true);
+            return Task.FromResult((++index).ToString());
         }
 
         public Task<ObservableCollection<WorkItem>> GetTodaysWorkAsync()

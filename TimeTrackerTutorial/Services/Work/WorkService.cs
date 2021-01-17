@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using TimeTrackerTutorial.Models;
 
@@ -15,19 +16,27 @@ namespace TimeTrackerTutorial.Services.Work
             _repo = repository;
         }
 
-        public Task<ObservableCollection<WorkItem>> GetTodaysWorkAsync()
+        public async Task<ObservableCollection<WorkItem>> GetTodaysWorkAsync()
         {
-            throw new NotImplementedException();
+            var all = await _repo.GetAll();
+            return new ObservableCollection<WorkItem>(all.Where(item => IsForToday(item)));
         }
 
         public Task<List<WorkItem>> GetWorkForThisPeriodAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<WorkItem>());
         }
 
-        public Task<bool> LogWorkAsync(WorkItem item)
+        public Task<string> LogWorkAsync(WorkItem item)
         {
-            throw new NotImplementedException();
+            return _repo.Save(item);
         }
+
+        private bool IsForToday(WorkItem item)
+        {
+            var today = DateTime.Now;
+            return item.Start.Year == today.Year && item.Start.DayOfYear == today.DayOfYear;
+        }
+
     }
 }

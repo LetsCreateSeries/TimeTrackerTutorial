@@ -55,6 +55,7 @@ namespace TimeTrackerTutorial.PageModels
             _workService = workService;
         }
 
+
         public override async Task InitializeAsync(object navigationData)
         {
             _hourlyRate = await _accountService.GetCurrentPayRateAsync();

@@ -25,8 +25,10 @@ namespace TimeTrackerTutorial.Droid.ServiceListeners
                 if (docsObj is QuerySnapshot docs)
                 {
                     _tcs.TrySetResult(docs.Convert<T>());
+                    return;
                 }
             }
+            _tcs.TrySetResult(default);
         }
     }
 }

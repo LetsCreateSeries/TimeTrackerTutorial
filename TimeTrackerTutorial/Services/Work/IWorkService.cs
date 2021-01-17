@@ -8,7 +8,7 @@ namespace TimeTrackerTutorial.Services.Work
 {
     public interface IWorkService
     {
-        Task<bool> LogWorkAsync(WorkItem item);
+        Task<string> LogWorkAsync(WorkItem item);
         Task<ObservableCollection<WorkItem>> GetTodaysWorkAsync();
         Task<List<WorkItem>> GetWorkForThisPeriodAsync();
     }

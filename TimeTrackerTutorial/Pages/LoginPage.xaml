@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:TimeTrackerTutorial.Views" mc:Ignorable="d"
         NavigationPage.HasNavigationBar="False"
+        xmlns:buttons="clr-namespace:TimeTrackerTutorial.Views.Buttons"
         xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
         x:Class="TimeTrackerTutorial.Pages.LoginPage">
     <ContentPage.Content>
@@ -12,13 +13,23 @@
             <skViews:RectGradientView StartColor="{StaticResource GradientStartColor}"
                     EndColor="{StaticResource GradientEndColor}"
                     VerticalOptions="FillAndExpand" />
-            <StackLayout>
+            <StackLayout WidthRequest="220" HorizontalOptions="Center">
                 <!-- App Icon -->
                 <Image WidthRequest="200" Aspect="AspectFit"
-                        HorizontalOptions="Center" Margin="20,80,20,20"
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="Center" Margin="20,0,20,40"
                         Source="history" />
                 <views:LoginEntryView BindingContext="{Binding EmailEntryViewModel}" />
                 <views:LoginEntryView BindingContext="{Binding PasswordEntryViewModel}" />
+
+                <buttons:BindableButton BackgroundColor="Transparent"
+                        TextColor="White" FontFamily="Nunito-Regular"
+                        BindingContext="{Binding ForgotPasswordModel}"
+                        HorizontalOptions="End" WidthRequest="140" />
+                <buttons:BindableButton BindingContext="{Binding LogInModel}" />
+                <buttons:BindableButton BindingContext="{Binding UsePhoneModel}"
+                        BackgroundColor="Transparent" TextColor="White"
+                        VerticalOptions="StartAndExpand" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

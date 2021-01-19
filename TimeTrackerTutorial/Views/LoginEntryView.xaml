@@ -5,7 +5,7 @@
         xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
         x:Class="TimeTrackerTutorial.Views.LoginEntryView">
     <ContentView.Content>
-        <Grid RowDefinitions="40,2">
+        <Grid RowDefinitions="40,2" RowSpacing="0">
             <entries:PlainEntry Placeholder="{Binding Placeholder}"
                     PlaceholderColor="#AFFF" FontFamily="Nunito-Regular"
                     x:Name="entInput" Text="{Binding Text}" TextColor="White"

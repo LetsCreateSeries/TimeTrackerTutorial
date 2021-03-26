@@ -82,6 +82,7 @@
     <Compile Include="Services\WorkItemRepository.cs" />
     <Compile Include="Extensions\IIdentifiableExtensions.cs" />
     <Compile Include="Renderers\PlainEntryRenderer.cs" />
+    <Compile Include="Renderers\ExtendedFrameRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

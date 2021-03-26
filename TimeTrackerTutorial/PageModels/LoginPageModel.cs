@@ -46,7 +46,7 @@ namespace TimeTrackerTutorial.PageModels
             if (loginAttempt)
             {
                 // navigate to the Dashboard.
-                await _navigationService.NavigateToAsync<DashboardPageModel>();
+                await _navigationService.NavigateToAsync<RecentActivityPageModel>();
             }
             else
             {

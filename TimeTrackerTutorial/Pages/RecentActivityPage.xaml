@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skViews="clr-namespace:TimeTrackerTutorial.Views.SKViews"
+    xmlns:buttons="clr-namespace:TimeTrackerTutorial.Views.Buttons"
+    xmlns:layouts="clr-namespace:TimeTrackerTutorial.Views.Layouts"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="TimeTrackerTutorial.Pages.RecentActivityPage">
+    <ContentPage.Content>
+        <Grid RowDefinitions="280,*" BackgroundColor="{StaticResource BackgroundColorLight}">
+            <skViews:RectGradientView StartColor="{StaticResource GradientStartColor}"
+                    EndColor="{StaticResource GradientEndColor}"
+                    VerticalOptions="FillAndExpand" />
+            <StackLayout>
+                <!-- Header layout -->
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Margin="20">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Recent Activity" VerticalOptions="Center" />
+                    <buttons:BindableButton BackgroundColor="Transparent"
+                                            BindingContext="{Binding ViewAllModel}"
+                                            FontAttributes="None" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <layouts:ExtendedFrame BackgroundColor="White" CornerRadius="20" HasShadow="True"
+                       Padding="10" VerticalOptions="FillAndExpand" ShadowOpacity="0.25"
+                                       ShadowOffset="0,3" ShadowRadius="3">
+                    <StackLayout>
+                        <!-- recent activity list -->
+                    </StackLayout>
+                </layouts:ExtendedFrame>
+            </StackLayout>
+
+            <buttons:BindableButton BindingContext="{Binding ClockInModel}"
+                                    Grid.Row="1" Margin="0,-30,0,0"
+                                    VerticalOptions="Start" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

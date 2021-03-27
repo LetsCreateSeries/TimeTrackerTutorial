@@ -16,5 +16,6 @@ namespace TimeTrackerTutorial.Models
         }
 
         public string Id { get; set; }
+        public JobItem Job { get; set; }
     }
 }

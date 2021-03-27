@@ -18,17 +18,50 @@
 
             <StackLayout Grid.Row="1" Margin="20,40,20,0" Spacing="0">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Recent Work" VerticalOptions="Center"  />
-                    <Button BackgroundColor="Transparent" TextColor="Black"
-                            Text="View All" HorizontalOptions="EndAndExpand" />
+                    <Label Text="Recent Work" VerticalOptions="Center" FontFamily="Nunito-ExtraBold"
+                           TextColor="{StaticResource GradientEndColor}" FontSize="20" />
+                    <Button BackgroundColor="Transparent" TextColor="{StaticResource GradientEndColor}"
+                            Text="View All" HorizontalOptions="EndAndExpand" FontFamily="Nunito-Light"
+                            FontSize="20" />
                 </StackLayout>
                 <layouts:ExtendedFrame BackgroundColor="White" HasShadow="True" CornerRadius="20"
-                       VerticalOptions="FillAndExpand" Margin="0,20" Padding="16"
+                       VerticalOptions="FillAndExpand" Margin="0,10,0,20" Padding="16"
                                        ShadowOffset="0,3" ShadowRadius="3"
                                        ShadowOpacity="0.25">
-                    <StackLayout>
+                    <CollectionView ItemsSource="{Binding WorkItems}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Grid Margin="0,0,0,20" ColumnDefinitions="65,*,80" RowDefinitions="25,20,25" RowSpacing="0">
+                                        <skViews:CircleGradientView HeightRequest="60" Grid.RowSpan="3" VerticalOptions="Center"
+                                                                StartColor="{StaticResource GradientStartColor}"
+                                                                EndColor="{StaticResource GradientEndColor}"/>
+                                        <StackLayout Grid.RowSpan="3" HeightRequest="65" VerticalOptions="Center" Spacing="0" >
+                                            <!-- labels -->
+                                            <Label Text="{Binding TotalHours, StringFormat='{}{0:0.##}'}" TextColor="White"
+                                               VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="20"
+                                               FontFamily="Nunito-ExtraBold"/>
+                                            <Label Text="hours" HorizontalOptions="Center" VerticalOptions="StartAndExpand"
+                                               TextColor="White" FontSize="15" FontFamily="Nunito-Light"
+                                               Margin="0,-8,0,0"/>
+                                        </StackLayout>
 
-                    </StackLayout>
+                                        <Label Text="{Binding JobName}" Grid.Column="1" VerticalOptions="End" FontSize="15"
+                                           FontFamily="Nunito-Bold"/>
+                                        <Label Text="{Binding StartEnd}" Grid.Column="1" Grid.Row="1"
+                                           VerticalOptions="Center" TextColor="{StaticResource GradientEndColor}"
+                                           FontSize="15" FontFamily="Nunito-Bold"/>
+                                        <Label Text="{Binding Date}" Grid.Column="1" Grid.Row="2"
+                                           VerticalOptions="Start" TextColor="#B2B2B2"
+                                           FontSize="10" FontFamily="Nunito-BoldItalic"/>
+
+                                        <Label Text="{Binding Earnings}" Grid.Column="2" Grid.Row="1" HorizontalOptions="End"
+                                           TextColor="{StaticResource GradientStartColor}" FontSize="15"  FontFamily="Nunito-Bold"/>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </layouts:ExtendedFrame>
             </StackLayout>
             <buttons:BindableButton BindingContext="{Binding ClockInModel}"

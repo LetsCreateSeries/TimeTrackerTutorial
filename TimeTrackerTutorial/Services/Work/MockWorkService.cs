@@ -8,10 +8,18 @@ namespace TimeTrackerTutorial.Services.Work
 {
     public class MockWorkService : IWorkService
     {
+        private JobItem _job;
+
         public List<WorkItem> Items { get; set; }
         public MockWorkService()
         {
             Items = new List<WorkItem>();
+            _job = new JobItem
+            {
+                Id = "1",
+                Name = "Xam.Forms App Development",
+                Rate = 35.15
+            };
         }
 
         public Task<bool> LogWorkAsync(WorkItem item)
@@ -32,12 +40,14 @@ namespace TimeTrackerTutorial.Services.Work
                 new WorkItem
                 {
                      Start = DateTime.Now.AddDays(-2),
-                     End = DateTime.Now.AddDays(-2).AddHours(1)
+                     End = DateTime.Now.AddDays(-2).AddHours(1),
+                     Job = _job
                 },
                 new WorkItem
                 {
                      Start = DateTime.Now.AddDays(-1),
-                     End = DateTime.Now.AddDays(-1).AddHours(1)
+                     End = DateTime.Now.AddDays(-1).AddHours(1),
+                     Job = _job
                 },
             });
         }
